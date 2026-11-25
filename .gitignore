@@ -1,0 +1,17 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+
+# Android build files
+android/.gradle/
+android/build/
+android/app/build/
+
+# Local preview files
+preview/
+launcher-backup/

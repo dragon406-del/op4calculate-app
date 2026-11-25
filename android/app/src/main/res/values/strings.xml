@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">OP4CALCULATE</string>
+    <string name="title_activity_main">OP4CALCULATE</string>
+    <string name="package_name">com.dragon.op4calculate</string>
+    <string name="custom_url_scheme">com.dragon.op4calculate</string>
+</resources>

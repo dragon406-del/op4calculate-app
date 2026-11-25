@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Scientific Calculator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+<div class="co gift connect bubunntainer">
+
+<div class="calculator">
+
+<div class="calculatorHeader">
+
+    <h2>OP4CALCULATE</h2>
+
+    <button
+        class="menuButton"
+        class=""onclick="openFunctionMenu()">
+        ☰
+    </button>
+
+</div>
+<div class="infoPanel">
+
+    <div
+        id="liveClock"
+        onclick="openWorldClock()">
+
+        00:00:00
+
+    </div>
+
+    <div
+        id="liveDate"
+        onclick="openCalendar()">
+
+        Loading...
+
+    </div>
+
+</div>
+<div class="displayContainer">
+
+    <div class="displayTop">
+
+
+        <span id="modeIndicator">DEG</span>
+
+    </div>
+
+    <div id="previewDisplay"></div>
+
+    <hr class="displayLine">
+
+    <input
+        type="text"
+        id="display"
+        class="display"
+        readonly>
+
+</div>
+
+<div id="factorialResultPanel" class="factorial-result-panel" style="display: none;">
+    <div class="factorial-result-header">
+        <span>Exact Factorial Result</span>
+    </div>
+
+    <div id="factorialResultText" class="factorial-result-text"></div>
+</div>
+
+
+<div class="buttonsContainer">
+
+    <div class="pageSelectorBar">
+        <button
+        type="button"
+        class="function settingsGear"
+        onclick="toggleSettings()"
+        title="Settings"
+        aria-label="Settings">
+        ⚙
+        </button>
+        <button id="AI" onclick="smartCommand()">
+            ✧AI
+            </button>
+    <div id="settingsPanel" class="settings-panel">
+
+    <h3>Settings</h3>
+
+    <button onclick="toggleTheme()">Dark / Light</button>
+
+    <button onclick="toggleMode()">DEG / RAD</button>
+
+    <button onclick="clearHistory()">Clear History</button>
+    <button onclick="exportHistory()">Export History</button>
+    <button onclick="setPrecision()">Precision</button>
+
+</div>
+
+        
+        <button
+            type="button"
+            id="pageSelector"
+            class="pageSelector"
+            onclick="togglePageMenu()">
+            ▤ 1/6 ▾
+        </button>
+
+        <div id="pageMenu" class="pageMenu" style="display: none;">
+            <button type="button" onclick="switchButtonPage(1)">1 · Basic</button>
+            <button type="button" onclick="switchButtonPage(2)">2 · Scientific</button>
+            <button type="button" onclick="switchButtonPage(3)">3 · Solvers</button>
+            <button type="button" onclick="switchButtonPage(4)">4 · Calculus & Graphs</button>
+            <button type="button" onclick="switchButtonPage(5)">5 · Advanced Math</button>
+            <button type="button" onclick="switchButtonPage(6)">6 · Tools</button>
+        </div>
+    </div>
+
+    <div class="buttons">
+        
+
+
+
+
+
+<!-- ================= MEMORY ================= -->
+
+<button class="memory" onclick="memoryClear()">MC</button>
+<button class="memory" onclick="memoryRecall()">MR</button>
+<button class="memory" onclick="memoryAdd()">M+</button>
+<button class="memory" onclick="memorySubtract()">M-</button>
+<button class="clear" onclick="clearDisplay()">AC</button>
+
+
+<!-- ================= BASIC CALCULATOR ================= -->
+
+<button class="function" onclick="append('(')">(</button>
+<button class="function" onclick="append(')')">)</button>
+<button class="function" onclick="backspace()">⌫</button>
+<button class="operator" onclick="append('%')">%</button>
+<button class="operator" onclick="append('/')">÷</button>
+
+
+<button class="number" onclick="append('7')">7</button>
+<button class="number" onclick="append('8')">8</button>
+<button class="number" onclick="append('9')">9</button>
+<button class="operator" onclick="append('*')">×</button>
+<button class="function" onclick="insertSqrt()">√</button>
+
+
+<button class="number" onclick="append('4')">4</button>
+<button class="number" onclick="append('5')">5</button>
+<button class="number" onclick="append('6')">6</button>
+<button class="operator" onclick="append('-')">−</button>
+<button class="function" onclick="square()">x²</button>
+
+
+<button class="number" onclick="append('1')">1</button>
+<button class="number" onclick="append('2')">2</button>
+<button class="number" onclick="append('3')">3</button>
+<button class="operator" onclick="append('+')">+</button>
+<button class="function" onclick="power()">xʸ</button>
+
+
+<button class="number" onclick="append('0')">0</button>
+<button class="number" onclick="append('.')">.</button>
+<button class="equal" onclick="calculate()">=</button>
+<button class="clear" onclick="clearHistory()">
+HC
+</button>
+<button class="function" onclick="inverse()">1/x</button>
+
+</div>
+
+<div class="buttonPage" data-page="2">
+
+<!-- ================= SCIENTIFIC ================= -->
+
+<button class="function" onclick="append('sin(')">sin</button>
+
+<button class="function" onclick="append('cos(')">cos</button>
+<button class="function" onclick="append('tan(')">tan</button>
+
+
+<button class="function" onclick="asin()">sin⁻¹</button>
+<button class="function" onclick="acos()">cos⁻¹</button>
+<button class="function" onclick="atan()">tan⁻¹</button>
+
+
+<button class="function" onclick="logValue()">log</button>
+<button class="function" onclick="ln()">ln</button>
+
+
+<button class="function" onclick="append('pi')">π</button>
+<button class="function" onclick="append('e')">e</button>
+<button class="function" onclick="factorial()">x!</button>
+
+
+<button class="function" onclick="toggleMode()" id="modeBtn">DEG</button>
+
+</div>
+
+<div class="buttonPage" data-page="3">
+
+
+
+
+<!-- ================= POWERS / ROOTS ================= -->
+
+
+<button class="function" onclick="cubeValue()">x³</button>
+
+<button class="function" onclick="cubeRoot()">∛x</button>
+
+<button class="function" onclick="tenPower()">10ˣ</button>
+
+<button class="function" onclick="expPower()">eˣ</button>
+
+<button class="function" onclick="absolute()">|x|</button>
+
+<button class="function" onclick="plusMinus()">±</button>
+<button class="function" onclick="append('=')">=</button>
+<button class="function" onclick="append(',')">,</button>
+
+<button class="variable" onclick="append('y')">y</button>
+
+<button class="variable" onclick="append('z')">z</button>
+
+<button class="variable" onclick="append('a')">a</button>
+
+<button class="variable" onclick="append('b')">b</button>
+
+<button class="variable" onclick="append('c')">c</button>
+
+<button class="variable" onclick="append('t')">t</button>
+
+<button class="variable" onclick="append('n')">n</button>
+
+<button class="variable" onclick="append('θ')">θ</button>
+
+
+
+<!-- ================= EQUATION SOLVER ================= -->
+
+
+<button class="function"
+onclick="currentMode='SOLVER'; solverMenu()">
+Solver
+</button>
+
+
+<button class="function" onclick="solveEquation()">
+Solve
+</button>
+
+
+<button class="function" onclick="solve2Variables()">
+2-Var
+</button>
+
+
+<button class="function" onclick="solve3Variables()">
+3-Var
+</button>
+
+
+<button class="function" onclick="quadraticSolver()">
+Quad
+</button>
+
+
+<button class="function" onclick="solveCubic()">
+Cubic
+</button>
+
+
+<button class="function" onclick="solveQuartic()">
+Quartic
+</button>
+
+
+<button class="function" onclick="polynomialSolver()">
+Poly
+</button>
+
+
+<button class="function" onclick="newtonSolver()">
+Newton
+</button>
+
+
+<button class="function" onclick="bisectionMethod()">
+Bisect
+</button>
+
+
+<button class="function" onclick="verifyEquation()">
+Verify
+</button>
+
+
+
+<!-- ================= CALCULUS ================= -->
+
+
+<button class="function"
+onclick="currentMode='DIFFERENTIATE'; differentiate();">
+d/dx
+</button>
+
+
+<button class="function" onclick="symbolicDerivative()">
+d/dx f(x)
+</button>
+
+
+<button class="function"
+onclick="currentMode='INTEGRATE'; integrate();">
+∫dx
+</button>
+
+
+<button class="function" onclick="calculateLimit()">
+Limit
+</button>
+
+
+<button class="function" onclick="taylorSeries()">
+Taylor
+</button>
+
+
+<button class="function" onclick="simplifyExpression()">
+Simplify
+</button>
+<!-- ================= GRAPHING ================= -->
+
+
+
+
+
+<button class="function" onclick="graphTrace()">
+Trace
+</button>
+
+
+<button class="function" onclick="graphTangent()">
+Tangent
+</button>
+
+
+<button class="function" onclick="graphNormal()">
+Normal
+</button>
+
+
+<button class="function" onclick="graphAnalysisMenu()">
+Analyze
+</button>
+
+
+<button class="function"
+onclick="currentMode='TABLE'; tableMode()">
+TABLE
+</button>
+
+
+<button class="function" onclick="zoomIn()">
+Zoom +
+</button>
+
+
+<button class="function" onclick="zoomOut()">
+Zoom −
+</button>
+
+
+
+
+
+
+</div>
+
+<div class="buttonPage" data-page="4">
+
+
+<!-- ================= MATRIX ================= -->
+
+
+<button class="function"
+onclick="currentMode='MATRIX'; matrixMenu()">
+Matrix
+</button>
+
+
+<button class="function" onclick="matrixDet()">
+Det
+</button>
+
+
+<button class="function" onclick="matrixTranspose()">
+Aᵀ
+</button>
+
+
+<button class="function" onclick="matrixInverse()">
+A⁻¹
+</button>
+
+
+
+
+<!-- ================= VECTOR ================= -->
+
+<button class="function"
+onclick="currentMode='VECTOR'; openVectorMenu()">
+Vector
+</button>
+<button class="function"
+onclick="currentMode='GRAPH'; drawGraph()">
+Graph
+</button>
+
+
+<button class="function" onclick="drawMultipleGraphs()">
+Multi Graph
+</button>
+
+<button class="function" onclick="graph3D()">
+3D Graph
+</button>
+<button class="function" onclick="saveGraph()">
+Save Graph
+</button>
+
+</div>
+
+<div class="buttonPage" data-page="5">
+
+
+
+<!-- ================= COMPLEX ================= -->
+
+
+<button class="function"
+onclick="currentMode='COMPLEX'; complexMenu()">
+Comp
+</button>
+
+
+<button class="function" onclick="insertComplex()">
+i
+</button>
+
+
+<button class="function" onclick="toComplex()">
+a+bi
+</button>
+
+
+<button class="function" onclick="complexAbs()">
+|z|
+</button>
+
+
+<button class="function" onclick="complexConjugate()">
+conj
+</button>
+
+
+
+
+<!-- ================= STATISTICS ================= -->
+
+
+<button class="function"
+onclick="currentMode='STATISTICS'; statisticsMenu()">
+STAT
+</button>
+
+
+<button class="function" onclick="mean()">
+Mean
+</button>
+
+
+<button class="function" onclick="probabilityMenu()">
+Prob
+</button>
+
+<button class="function"
+onclick="currentMode='REGRESSION'; regressionMenu()">
+Reg
+</button>
+
+<!-- ================= NUMBER THEORY ================= -->
+
+
+<button class="function"
+onclick="currentMode='NUMBER_THEORY'; numberTheoryMenu()">
+Number
+</button>
+
+
+
+
+<!-- ================= BASE CONVERSION ================= -->
+
+
+<button class="function"
+onclick="currentMode='BASE'; baseMenu()">
+BASE
+</button>
+
+
+<button class="function" onclick="toBinary()">
+BIN
+</button>
+
+
+<button class="function" onclick="toDecimalBase()">
+DEC
+</button>
+
+
+<button class="function" onclick="toOctal()">
+OCT
+</button>
+
+
+<button class="function" onclick="toHex()">
+HEX
+</button>
+
+
+</div>
+
+<div class="buttonPage" data-page="6">
+
+
+
+<!-- ================= ENGINEERING ================= -->
+
+
+<button class="function" onclick="eng()">
+ENG
+</button>
+
+
+<button class="function" onclick="engUp()">
+ENG▶
+</button>
+
+
+<button class="function" onclick="engDown()">
+◀ENG
+</button>
+
+
+
+
+<!-- ================= FRACTION / DECIMAL ================= -->
+
+
+<button class="function" onclick="toFraction()">
+a/b
+</button>
+
+
+<button class="function" onclick="toDecimal()">
+a↔b
+</button>
+
+
+
+
+<!-- ================= COMBINATION / PERMUTATION ================= -->
+
+
+<button class="function" onclick="combination()">
+nCr
+</button>
+
+
+<button class="function" onclick="permutation()">
+nPr
+</button>
+
+
+<button class="function" onclick="randomValue()">
+Rand
+</button>
+
+
+
+
+<!-- ================= VARIABLES ================= -->
+
+
+<button class="memory" onclick="answer()">
+Ans
+</button>
+
+
+<button class="function" onclick="alphaMenu()">
+ALPHA
+</button>
+
+
+
+
+<!-- ================= SEQUENCE ================= -->
+
+
+<button class="function" onclick="sequenceMenu()">
+SEQ
+</button>
+
+
+
+
+<!-- ================= UNIT CONVERSION ================= -->
+
+
+<button class="function" onclick="meterToFeet()">
+m→ft
+</button>
+
+
+<button class="function" onclick="feetToMeter()">
+ft→m
+</button>
+
+
+<button class="function" onclick="celsiusToFahrenheit()">
+°C→°F
+</button>
+
+
+<button class="function" onclick="fahrenheitToCelsius()">
+°F→°C
+</button>
+
+
+<button class="function" onclick="kgToPound()">
+kg→lb
+</button>
+
+
+<button class="function" onclick="poundToKg()">
+lb→kg
+</button>
+<!-- ================= CHEMISTRY ================= -->
+
+
+<button class="function"
+onclick="currentMode='CHEMISTRY'; chemistryMenu()">
+CHEM
+</button>
+
+
+<button class="function" onclick="periodicTable()">
+PERIOD
+</button>
+
+<!-- ================= CONSTANTS / FORMULAS ================= -->
+
+
+<button class="function" onclick="constants()">
+Const
+</button>
+
+
+<button class="function" onclick="showFormulas()">
+Formula
+</button>
+
+
+
+
+<!-- ================= PROGRAMMING ================= -->
+
+
+<button class="function" onclick="programmingMenu()">
+PROG
+</button>
+
+
+<button class="function" onclick="runProgram()">
+Run Prog
+</button>
+
+
+
+
+<!-- ================= HISTORY ================= -->
+
+
+
+
+<!-- ================= SETTINGS ================= -->
+<!-- ================= SMART COMMAND ================= -->
+<button class="function" onclick="openStopwatch()">
+⏱ Stop
+watch
+</button>
+
+<button class="function" onclick="openTimer()">
+    ⏳ Timer
+</button>
+
+</div>
+</div>
+</div>
+
+
+<div id="vectorMenu" class="popup" style="display:none;">
+    <div class="popup-content">
+        <h3>Vector Calculator</h3>
+
+        <button onclick="vectorChoice(1)">1. Vector Addition</button>
+        <button onclick="vectorChoice(2)">2. Vector Subtraction</button>
+        <button onclick="vectorChoice(3)">3. Dot Product</button>
+        <button onclick="vectorChoice(4)">4. Cross Product</button>
+        <button onclick="vectorChoice(5)">5. Magnitude</button>
+        <button onclick="vectorChoice(6)">6. Unit Vector</button>
+        <button onclick="vectorChoice(7)">7. Angle Between Vectors</button>
+        <button onclick="vectorChoice(8)">
+8. Projection
+</button>
+
+        <br><br>
+
+        <button onclick="closeVectorMenu()">Close</button>
+    </div>
+</div><div></div>
+<canvas
+id="graphCanvas"
+width="500"
+height="400"
+style="
+background:white;
+border:2px solid black;
+margin-top:20px;
+border-radius:10px;">
+</canvas>
+
+<div class="history">
+
+<h2>History</h2>
+<hr>
+
+<div id="historyList"></div>
+
+</div>
+</div>
+<!-- ================= SMART COMMAND WINDOW ================= -->
+
+<div id="smartModal" class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>AI COMMAND</h2>
+
+            <div class="modal-buttons">
+
+                <button onclick="openSmartHelp()">⋮
+                </button>
+
+                <button onclick="closeSmartModal()">✕</button>
+
+            </div>
+
+        </div>
+
+        <div class="modal-body">
+
+            <label>Enter Command</label>
+
+           <input
+type="text"
+id="smartInput"
+placeholder="Example : solve x^2-5x+6=0"
+onkeyup="showSmartSuggestions()">
+                <div id="smartSuggestions" class="smartSuggestions"></div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button onclick="executeSmart()">Execute</button>
+
+            <button onclick="closeSmartModal()">Cancel</button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================= SMART HELP WINDOW ================= -->
+
+<div id="smartHelpModal" class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>SMART HELP</h2>
+
+            <button onclick="closeSmartHelp()">✕</button>
+
+        </div>
+
+<div class="modal-body">
+
+    <input
+        id="smartSearch"
+        type="text"
+        placeholder="Search commands..."
+        onkeyup="searchSmartHelp()">
+
+    <div id="smartHelpContent">
+
+    </div>
+
+</div>
+
+    </div>
+
+</div>
+<div id="functionMenu" class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>Function Reference</h2>
+
+            <button onclick="closeFunctionMenu()">✖</button>
+
+        </div>
+
+        <div class="modal-body">
+
+            <input
+                id="functionSearch"
+                type="text"
+                placeholder="Search functions..."
+                onkeyup="searchFunctionMenu()">
+
+            <div id="functionMenuContent">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<div id="stopwatchModal" class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>Stopwatch</h2>
+
+            <button onclick="closeStopwatch()">✖</button>
+
+        </div>
+
+        <div class="modal-body">
+
+            <div id="stopwatchDisplay">
+                00:00:00.000
+            </div>
+
+            <br>
+
+            <button onclick="startStopwatch()">Start</button>
+
+            <button onclick="pauseStopwatch()">Pause</button>
+
+            <button onclick="resetStopwatch()">Reset</button>
+
+            <button onclick="lapStopwatch()">Lap</button>
+
+            <div id="lapList"></div>
+
+        </div>
+
+    </div>
+
+</div>
+<div id="timerModal" class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>Countdown Timer</h2>
+
+            <button onclick="closeTimer()">✖</button>
+
+        </div>
+
+        <div class="modal-body">
+
+           <input
+    id="timerHours"
+    type="number"
+    placeholder="Hours"
+    min="0"
+    style="width:70px;">
+
+<input
+    id="timerMinutes"
+    type="number"
+    placeholder="Minutes"
+    min="0"
+    max="59"
+    style="width:70px;">
+
+<input
+    id="timerSeconds"
+    type="number"
+    placeholder="Seconds"
+    min="0"
+    max="59"
+    style="width:70px;">
+
+            <br><br>
+
+            <div id="timerDisplay">
+    00:00:00
+</div>
+
+            <br>
+
+            <button onclick="startTimer()">
+
+                Start
+
+            </button>
+
+            <button onclick="pauseTimer()">
+
+                Pause
+
+            </button>
+
+            <button onclick="resetTimer()">
+
+                Reset
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+<div id="worldClockModal" class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>World Clock</h2>
+
+            <button onclick="closeWorldClock()">✖</button>
+
+        </div>
+
+        <div class="modal-body">
+
+            <div id="worldClockContent"></div>
+
+        </div>
+
+    </div>
+
+</div>
+<div id="calendarModal" class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>Calendar</h2>
+
+            <button onclick="closeCalendar()">✖</button>
+
+        </div>
+
+        <div class="modal-body">
+
+<input type="date" id="calendarPicker">
+
+        </div>
+
+    </div>
+
+</div>
+<div id="graph3DModal" class="modal">
+
+    <div class="modal-content" style="width:95%;max-width:900px;">
+
+        <div class="modal-header">
+
+            <h2>3D Graph</h2>
+
+            <button onclick="close3DGraph()">✖</button>
+
+        </div>
+
+        <div class="modal-body">
+
+            <input
+                id="graph3DInput"
+                type="text"
+                placeholder="Example : x^2+y^2">
+
+            <br><br>
+
+            <button class="3d" onclick="plot3DGraph()">
+
+                Plot
+
+            </button>
+
+<button class="3d" onclick="clear3DGraph()">
+
+    Clear
+
+</button>
+<button onclick="zoomIn3D()">Zoom +</button>
+
+<button onclick="zoomOut3D()">Zoom −</button>
+<button onclick="reset3DView()">Reset</button>
+
+            <br><br>
+
+            <div id="graph3DContainer"
+     style="width:100%;
+            height:500px;
+            border-radius:10px;
+            overflow:hidden;">
+
+</div>
+
+        </div>
+
+    </div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/mathjs@14/lib/browser/math.js"></script>
+
+<script src="three.min.js"></script>
+<script src="OrbitControls.js"></script>
+
+<script src="core.js"></script>
+<script src="smart.js"></script>
+<script src="graph.js"></script>
+<script src="script.js"></script>
+<script src="date.js"></script>

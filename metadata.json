@@ -1,0 +1,6 @@
+{
+  "name": "OP4Calculate - Professional Scientific Calculator",
+  "description": "Professional scientific calculator featuring multi-page functional layout, 100+ digit high-precision factorials, interactive 3D surface graphing, smart AI commands, calculus solvers, and compact time tools.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
