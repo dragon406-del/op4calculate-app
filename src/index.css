@@ -312,3 +312,12 @@ button:active {
 .timer-vibrate {
   animation: timer-vibrate 0.35s ease-in-out infinite;
 }
+/* Prevent calculator button labels from 
+overflowing */ .buttons button, .buttonPage 
+button {
+  min-width: 0; padding: 0 2px; font-size: 
+  clamp(10px, 3.3vw, 13px); line-height: 
+  1.1; text-align: center; white-space: 
+  normal; overflow-wrap: break-word;
+}
+
