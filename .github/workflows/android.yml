@@ -32,6 +32,12 @@ jobs:
       - name: Build web app
         run: npm run build
 
+      - name: Generate Android launcher icons
+        run: npx capacitor-assets generate --android --assetPath icon-assets
+
+      - name: Remove old adaptive icon references
+        run: rm -f android/app/src/main/res/mipmap-anydpi-v26/ic_launcher*.xml
+
       - name: Sync Capacitor Android
         run: npx cap sync android
 
