@@ -20,13 +20,22 @@ export const SmartAIModal: React.FC<SmartAIModalProps> = ({
   const [isCopied, setIsCopied] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
+  const categories = useMemo(
+    () => ['All', ...Array.from(new Set(SMART_COMMANDS.map((cmd) => cmd.category)))],
+    []
+  );
+
+
   // Suggestions based on input or category
   const suggestions = useMemo(() => {
     const q = inputVal.toLowerCase().trim();
     if (!q) {
-      if (selectedCategory === 'All') return SMART_COMMANDS.slice(0, 7);
-      return SMART_COMMANDS.filter((cmd) => cmd.category.toLowerCase() === selectedCategory.toLowerCase()).slice(0, 7);
+      if (selectedCategory === 'All') return SMART_COMMANDS;
+      return SMART_COMMANDS.filter(
+        (cmd) => cmd.category.toLowerCase() === selectedCategory.toLowerCase()
+      );
     }
+
     return SMART_COMMANDS.filter((cmd) => {
       return (
         cmd.syntax.toLowerCase().includes(q) ||
@@ -34,7 +43,7 @@ export const SmartAIModal: React.FC<SmartAIModalProps> = ({
         cmd.category.toLowerCase().includes(q) ||
         cmd.keywords.some((k) => k.toLowerCase().includes(q))
       );
-    }).slice(0, 8);
+    });
   }, [inputVal, selectedCategory]);
 
   if (!isOpen) return null;
@@ -183,14 +192,14 @@ export const SmartAIModal: React.FC<SmartAIModalProps> = ({
 
           {/* Command Reference Browser */}
           <div className="border border-slate-800 rounded-xl bg-slate-950/60 p-2.5 flex flex-col gap-2">
-            <div className="flex items-center justify-between px-1">
+            <div className="flex flex-col gap-2 px-1 min-w-0">
               <span className="text-[10px] font-mono uppercase text-slate-400">Available AI Functions ({suggestions.length})</span>
-              <div className="flex items-center gap-1">
-                {['All', 'Mathematics', 'Algebra', 'Calculus', 'Chemistry'].map((cat) => (
+              <div className="flex items-center gap-1 min-w-0 max-w-full overflow-x-auto whitespace-nowrap pb-1">
+                {categories.map((cat) => (
                   <button
                     key={cat}
                     onClick={() => setSelectedCategory(cat)}
-                    className={`px-1.5 py-0.5 rounded text-[10px] transition ${
+                    className={`shrink-0 px-1.5 py-0.5 rounded text-[10px] transition ${
                       selectedCategory === cat
                         ? 'bg-cyan-500/30 text-cyan-300 font-bold'
                         : 'text-slate-400 hover:text-slate-200'
